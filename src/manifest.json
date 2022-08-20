@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
+  "gameVersion": "1.24.0",
+  "id": "UnityExplorer",
+  "name": "UnityExplorer",
+  "author": "sinai-dev",
+  "description": "An in-game UI for exploring, debugging and modifying Unity games.",
+  "version": "4.9.0",
+  "dependsOn": {
+    "BSIPA": "^4.2.2"
+  },
+  "misc": {
+    "plugin-hint": "UnityExplorer.Loader.BSIPA4.ExplorerBsipaPlugin"
+  }
+}

@@ -11,7 +11,7 @@
         <DebugType>none</DebugType>
         <RootNamespace>UnityExplorer</RootNamespace>
         <LangVersion>10.0</LangVersion>
-        <Configurations>BIE_Cpp;BIE_Cpp_CoreCLR;BIE5_Mono;BIE6_Mono;ML_Cpp_net6;ML_Cpp_net472;ML_Mono;STANDALONE_Mono;STANDALONE_Cpp</Configurations>
+        <Configurations>BIE_Cpp;BIE_Cpp_CoreCLR;BIE5_Mono;BIE6_Mono;ML_Cpp_net6;ML_Cpp_net472;ML_Mono;STANDALONE_Mono;STANDALONE_Cpp;BSIPA4</Configurations>
     </PropertyGroup>
     <!-- ~~~~~ CONFIGURATIONS ~~~~~ -->
     <!-- ML IL2CPP net6 -->
@@ -77,6 +77,13 @@
         <DefineConstants>CPP,STANDALONE,UNHOLLOWER</DefineConstants>
         <AssemblyName>UnityExplorer.STANDALONE.IL2CPP</AssemblyName>
     </PropertyGroup>
+    <!-- BSIPA 4 -->
+    <PropertyGroup Condition="'$(Configuration)'=='BSIPA4'">
+        <TargetFramework>net472</TargetFramework>
+        <OutputPath>..\Release\UnityExplorer.BSIPA4\</OutputPath>
+        <DefineConstants>MONO,BSIPA4</DefineConstants>
+        <AssemblyName>UnityExplorer.BSIPA4</AssemblyName>
+    </PropertyGroup>
 
     <!-- ~~~~~ NUGET ~~~~~ -->
     <ItemGroup>
@@ -94,7 +101,7 @@
         <PackageReference Include="UniverseLib.IL2CPP.Interop" Version="1.5.1" />
     </ItemGroup>
     <!-- mono nuget -->
-    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono'">
+    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono' or '$(Configuration)'=='BSIPA4'">
         <PackageReference Include="UniverseLib.Mono" Version="1.5.1" />
     </ItemGroup>
 
@@ -156,8 +163,22 @@
             <Private>False</Private>
         </Reference>
     </ItemGroup>
+    <!-- BSIPA 4 -->
+	<ItemGroup Condition="'$(Configuration)'=='BSIPA4'">
+		<Reference Include="BepInEx">
+			<HintPath>..\lib\net472\IPA.Injector.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="BepInEx.IL2CPP">
+			<HintPath>..\lib\net472\IPA.Loader.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'=='BSIPA4'">
+		<EmbeddedResource Include="manifest.json"/>
+	</ItemGroup>
     <!-- Mono -->
-    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono'">
+    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono' or '$(Configuration)'=='BSIPA4'">
         <Reference Include="UnityEngine">
             <HintPath>..\lib\net35\UnityEngine.dll</HintPath>
             <Private>False</Private>
