@@ -14,7 +14,7 @@
     <!-- MSBuildの.NET8対応に伴って勝手にバージョンにハッシュ値入れられてBepInExのロード不具合が出たため、明示的に無効化しておく -->
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <Optimize>true</Optimize>
-    <Configurations>BIE_Cpp;BIE_Cpp_CoreCLR;BIE_Unity_Cpp_CoreCLR;BIE5_Mono;BIE6_Mono;BIE6_Unity_Mono;ML_Cpp_net6;ML_Cpp_CoreCLR;ML_Cpp_net472;ML_Mono;STANDALONE_Mono;STANDALONE_Cpp;STANDALONE_Cpp_CoreCLR</Configurations>
+    <Configurations>BIE_Cpp;BIE_Cpp_CoreCLR;BIE_Unity_Cpp_CoreCLR;BIE5_Mono;BIE6_Mono;BIE6_Unity_Mono;ML_Cpp_net6;ML_Cpp_CoreCLR;ML_Cpp_net472;ML_Mono;STANDALONE_Mono;STANDALONE_Cpp;STANDALONE_Cpp_CoreCLR;BSIPA4</Configurations>
   </PropertyGroup>
 
 
@@ -28,7 +28,7 @@
     <ItemGroup Condition="'$(Configuration)'=='ML_Cpp_CoreCLR'">
       <Exec Command="dotnet build ..\UniverseLib\src\UniverseLib.sln -c Release_IL2CPP_Interop_ML" />
     </ItemGroup>
-    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono'">
+    <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono' or '$(Configuration)'=='BSIPA4'">
       <Exec Command="dotnet build ..\UniverseLib\src\UniverseLib.sln -c Release_Mono" />
     </ItemGroup>
   </Target>
@@ -129,6 +129,13 @@
     <DefineConstants>CPP,STANDALONE,INTEROP</DefineConstants>
     <AssemblyName>UnityExplorer.STANDALONE.IL2CPP.CoreCLR</AssemblyName>
   </PropertyGroup>
+  <!-- BSIPA 4 -->
+  <PropertyGroup Condition="'$(Configuration)'=='BSIPA4'">
+    <TargetFramework>net472</TargetFramework>
+    <OutputPath>..\Release\UnityExplorer.BSIPA4\</OutputPath>
+    <DefineConstants>MONO,BSIPA4</DefineConstants>
+    <AssemblyName>UnityExplorer.BSIPA4</AssemblyName>
+  </PropertyGroup>
 
   <!-- ~~~~~ NUGET ~~~~~ -->
   <ItemGroup>
@@ -172,7 +179,7 @@
   </ItemGroup>
 
   <!-- mono nuget -->
-  <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono'">
+  <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono' or '$(Configuration)'=='BSIPA4'">
     <Reference Include="UniverseLib">
       <HintPath>..\UniverseLib\Release\UniverseLib.Mono\UniverseLib.Mono.dll</HintPath>
       <Private>True</Private>
@@ -258,8 +265,20 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <!-- BSIPA 4 -->
+  <ItemGroup Condition="'$(Configuration)'=='BSIPA4'">
+    <Reference Include="IPA.Injector">
+      <HintPath>..\lib\net472\IPA.Injector.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="IPA.Loader">
+      <HintPath>..\lib\net472\IPA.Loader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <EmbeddedResource Include="manifest.json" />
+  </ItemGroup>
   <!-- Mono -->
-  <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono'">
+  <ItemGroup Condition="'$(Configuration)'=='BIE6_Mono' or '$(Configuration)'=='BIE6_Unity_Mono' or '$(Configuration)'=='BIE5_Mono' or '$(Configuration)'=='ML_Mono' or '$(Configuration)'=='STANDALONE_Mono' or '$(Configuration)'=='BSIPA4'">
     <Reference Include="UnityEngine">
       <HintPath>..\lib\net35\UnityEngine.dll</HintPath>
       <Private>False</Private>
