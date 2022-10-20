@@ -4,8 +4,10 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityExplorer.Config;
 using UnityExplorer.Loader.BIE;
-#if CPP
+#if UNHOLLOWER
 using BepInEx.IL2CPP;
+#elif INTEROP
+using BepInEx.Unity.IL2CPP;
 #endif
 
 namespace UnityExplorer

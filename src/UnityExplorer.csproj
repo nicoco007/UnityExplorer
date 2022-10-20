@@ -152,24 +152,35 @@
             <Private>False</Private>
         </Reference>
     </ItemGroup>
-    <!-- BepInEx Il2Cpp -->
-    <ItemGroup Condition="'$(Configuration)'=='BIE_Cpp' or '$(Configuration)'=='BIE_Cpp_CoreCLR'">
-        <Reference Include="BepInEx">
-            <HintPath>..\lib\net472\BepInEx.Core.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="BepInEx.IL2CPP">
-            <HintPath>..\lib\net472\BepInEx.IL2CPP.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-    </ItemGroup>
+	<!-- BepInEx Il2Cpp -->
+	<ItemGroup Condition="'$(Configuration)'=='BIE_Cpp'">
+		<Reference Include="BepInEx">
+			<HintPath>..\lib\net472\BepInEx.Core.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="BepInEx.IL2CPP">
+			<HintPath>..\lib\net472\BepInEx.IL2CPP.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+	<!-- BepInEx Il2Cpp CoreCLR -->
+	<ItemGroup Condition="'$(Configuration)'=='BIE_Cpp_CoreCLR'">
+		<Reference Include="BepInEx">
+			<HintPath>..\lib\net6\BepInEx.Core.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="BepInEx.Unity.IL2CPP">
+			<HintPath>..\lib\net6\BepInEx.Unity.IL2CPP.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
     <!-- BSIPA 4 -->
 	<ItemGroup Condition="'$(Configuration)'=='BSIPA4'">
 		<Reference Include="BepInEx">
 			<HintPath>..\lib\net472\IPA.Injector.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
-		<Reference Include="BepInEx.IL2CPP">
+		<Reference Include="IPA.Loader">
 			<HintPath>..\lib\net472\IPA.Loader.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
