@@ -7,7 +7,8 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
     <LangVersion>latest</LangVersion>
     <WarningLevel>8</WarningLevel>
     <RootNamespace>UnityExplorer</RootNamespace>
@@ -136,6 +137,9 @@
     <DefineConstants>MONO,BSIPA4</DefineConstants>
     <AssemblyName>UnityExplorer.BSIPA4</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="UnityExplorer.csproj.user" />
+  </ItemGroup>
 
   <!-- ~~~~~ NUGET ~~~~~ -->
   <ItemGroup>
@@ -374,4 +378,18 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <Target Name="CopyToGameFolder" AfterTargets="Build" Condition="'$(GameDirectory)' != ''">
+    <ItemGroup>
+      <FilesToCopy Include="$(TargetPath)" />
+      <FilesToCopy Include="$(TargetDir)$(TargetName).pdb" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <TargetDirectory Condition="'$(Configuration)' == 'BSIPA4'">$(GameDirectory)\Plugins</TargetDirectory>
+      <TargetDirectory Condition="$(Configuration.StartsWith('ML_'))">$(GameDirectory)\Mods</TargetDirectory>
+    </PropertyGroup>
+
+    <Message Importance="high" Text="$(TargetPath) -&gt; $(TargetDirectory)" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(TargetDirectory)" />
+  </Target>
 </Project>
