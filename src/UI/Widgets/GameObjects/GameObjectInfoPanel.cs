@@ -90,9 +90,9 @@ namespace UnityExplorer.UI.Widgets
                 IsStaticToggle.Set(Target.isStatic, false);
             }
 
-            if (force || Target.scene.handle != lastSceneHandle)
+            if (force || Target.scene.GetHandle() != lastSceneHandle)
             {
-                lastSceneHandle = Target.scene.handle;
+                lastSceneHandle = Target.scene.GetHandle();
                 SceneButton.ButtonText.text = Target.scene.IsValid() ? Target.scene.name : "None (Asset/Resource)";
             }
 
