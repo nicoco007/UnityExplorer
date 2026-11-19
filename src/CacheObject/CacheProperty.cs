@@ -10,11 +10,15 @@ namespace UnityExplorer.CacheObject
         public override bool IsStatic => m_isStatic ?? (bool)(m_isStatic = PropertyInfo.GetAccessors(true)[0].IsStatic);
         private bool? m_isStatic;
 
-        public override bool ShouldAutoEvaluate => !HasArguments;
+        public override bool ShouldAutoEvaluate => !HasArguments && !isManualEvaluate;
+
+        /// <summary>True if reading this property is known to have a side effect, so it requires the user to click Evaluate.</summary>
+        private readonly bool isManualEvaluate;
 
         public CacheProperty(PropertyInfo pi)
         {
             this.PropertyInfo = pi;
+            this.isManualEvaluate = ManualEvaluateProperties.IsManualEvaluate(pi);
         }
 
         public override void SetInspectorOwner(ReflectionInspector inspector, MemberInfo member)

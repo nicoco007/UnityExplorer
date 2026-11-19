@@ -30,6 +30,7 @@ namespace UnityExplorer.Config
         public static ConfigElement<KeyCode> UI_MouseInspect_Keybind;
         public static ConfigElement<string> CSConsole_Assembly_Blacklist;
         public static ConfigElement<string> Reflection_Signature_Blacklist;
+        public static ConfigElement<string> Reflection_Manual_Evaluate_Properties;
 
         public static ConfigElement<KeyCode> TIME_SCALE_TOGGLE;
         public static ConfigElement<KeyCode> LOCK_TIME_SCALE_TO_ZERO;
@@ -160,6 +161,13 @@ namespace UnityExplorer.Config
                 "Use this to blacklist certain member signatures if they are known to cause a crash or other issues.\r\n" +
                 "Seperate signatures with a semicolon ';'.\r\n" +
                 "For example, to blacklist Camera.main, you would add 'UnityEngine.Camera.main;'",
+                "");
+
+            Reflection_Manual_Evaluate_Properties = new("Manual-Evaluate Properties",
+                "Properties which the inspector won't evaluate automatically, because reading them has a side effect. They show an Evaluate button instead.\r\n" +
+                "Some are built in (e.g. Renderer.material, which creates a copy of the shared material); use this to add more.\r\n" +
+                "Separate signatures with a semicolon ';'. Takes effect for newly inspected objects.\r\n" +
+                "For example, to add Renderer.material, you would add 'UnityEngine.Renderer.material;'",
                 "");
 
             TIME_SCALE_TOGGLE = new("TimeScale Toggle",
